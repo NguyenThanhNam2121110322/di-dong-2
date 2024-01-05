@@ -3,14 +3,14 @@ import React, { createContext, useState } from 'react';
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItemCount, setCartItemCount] = useState(0);
 
-  const addToCart = (product) => {
-    setCartItems((prevCartItems) => [...prevCartItems, product]);
+  const updateCartItemCount = (count) => {
+    setCartItemCount(count);
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart }}>
+    <CartContext.Provider value={{ cartItemCount, updateCartItemCount }}>
       {children}
     </CartContext.Provider>
   );
