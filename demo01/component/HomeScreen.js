@@ -41,8 +41,8 @@ export default function HomeScreen() {
     return (
       <View>
         <View style={styles.catetitle}>
-          <Text style={{ fontSize: 20, color: 'red', fontWeight: '600' }}>Sản phẩm</Text>
-          <Text style={{ fontSize: 15 }}>Xem thêm</Text>
+          <Text style={{ fontSize: 20, color: 'red', fontWeight: '600' }}>Tất cả sản phẩm</Text>
+          {/* <Text style={{ fontSize: 15 }}>Xem thêm</Text> */}
         </View>
         <ScrollView>
           <View style={styles.container}>
@@ -64,12 +64,6 @@ export default function HomeScreen() {
                     <Text style={styles.ratingValue}>{product.rating.rate.toFixed(1)}</Text>
                     <Text style={styles.ratingCount}>({product.rating.count} reviews)</Text>
                   </View>
-                  <TouchableOpacity
-                    style={styles.cartButton}
-                    onPress={() => handleAddToCartPress(product)}
-                  >
-                    <Text style={styles.buttonText}>Cart</Text>
-                  </TouchableOpacity>
                 </View>
               </TouchableOpacity>
             ))}

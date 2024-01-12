@@ -2,11 +2,12 @@ import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CartContext } from '../CartProvider/CartContext';
+import { useNavigation } from '@react-navigation/native';
 
 
 const CartScreen = () => {
   const { updateCartItemCount } = useContext(CartContext);
-
+  const navigation = useNavigation();
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -63,8 +64,7 @@ const CartScreen = () => {
   };
 
   const handleCheckout = () => {
-    // Thực hiện quá trình thanh toán ở đây
-    console.log('Checkout');
+    navigation.navigate('Payment');
   };
 
   return (
@@ -91,7 +91,7 @@ const CartScreen = () => {
         <Text style={styles.emptyCartText}>Your cart is empty.</Text>
       )}
       <Text style={styles.totalPrice}>Total Price: ${totalPrice.toFixed(2)}</Text>
-      <Button title="Checkout" onPress={handleCheckout} />
+      <Button title="Thanh Toán" onPress={handleCheckout} />
     </View>
   );
 };

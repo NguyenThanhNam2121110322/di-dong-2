@@ -17,13 +17,16 @@ function HomeBar() {
     const handleCartPress = (cartItems) => {
         navigation.navigate('Cart', { cartItems });
     };
+    const handleSearchPress = () => {
+        navigation.navigate('Search');
+    };
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.item} onPress={() => handleHomePress()}>
                 <Icon name="home" size={20} color="#333333" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => handleSearchPress()}>
                 <Icon name="search" size={20} color="#333333" />
             </TouchableOpacity>
 

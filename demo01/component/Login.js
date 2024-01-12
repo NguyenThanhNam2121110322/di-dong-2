@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import Header from './Header';
-import Footer from './Footer';
+
 
 export default function Login() {
   return (
     <View style={styles.aaa}>
-      <Header/>
+      
     <View style={styles.container}>
       
       <Text style={styles.title}>Login</Text>
@@ -28,7 +27,7 @@ export default function Login() {
       <StatusBar style="auto" />
       
     </View>
-    <Footer/>
+    
     </View>
   );
 }
