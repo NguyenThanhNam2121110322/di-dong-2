@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView,Icon } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
@@ -40,10 +40,12 @@ export default function HomeScreen() {
   
     return (
       <View>
+         
         <View style={styles.catetitle}>
           <Text style={{ fontSize: 20, color: 'red', fontWeight: '600' }}>Tất cả sản phẩm</Text>
           {/* <Text style={{ fontSize: 15 }}>Xem thêm</Text> */}
         </View>
+        
         <ScrollView>
           <View style={styles.container}>
             {products.map((product) => (
@@ -70,6 +72,7 @@ export default function HomeScreen() {
           </View>
         </ScrollView>
       </View>
+      
     );
   }
 

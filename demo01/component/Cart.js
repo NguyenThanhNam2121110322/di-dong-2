@@ -1,13 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Button } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CartContext } from '../CartProvider/CartContext';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const CartScreen = () => {
+
+const Cart = () => {
   const { updateCartItemCount } = useContext(CartContext);
   const navigation = useNavigation();
+  
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -18,6 +21,11 @@ const CartScreen = () => {
   useEffect(() => {
     calculateTotalPrice();
   }, [cartItems]);
+
+  useEffect(() => {
+    setCartItems(cartItems);
+  }, [cartItems]);
+
 
   const fetchCartItems = async () => {
     try {
@@ -32,14 +40,28 @@ const CartScreen = () => {
     }
   };
 
+  const handleIncreaseQuantity = (productId) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+  const handleDecreaseQuantity = (productId) => {
+    setCartItems((prevItems) => 
+      prevItems.map((item) =>
+        item.id === productId
+          ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 1 }
+          : item
+      )
+    );
+  };
+
   const handleRemoveItem = async (itemId) => {
     try {
       const updatedCartItems = cartItems.map(item => {
         if (item.id === itemId) {
-          item.quantity -= 1;
-          if (item.quantity === 0) {
-            return null;
-          }
+          return null;
         }
         return item;
       }).filter(Boolean);
@@ -69,7 +91,7 @@ const CartScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Cart</Text>
+      <Text style={styles.title}>Giỏ hàng</Text>
       {cartItems.length > 0 ? (
         <FlatList
           data={cartItems}
@@ -77,20 +99,41 @@ const CartScreen = () => {
             <View style={styles.cartItem}>
               <Image source={{ uri: item.image }} style={styles.cartItemImage} />
               <View style={styles.cartItemInfo}>
-                <Text style={styles.cartItemTitle}>{item.title} ({item.quantity})</Text>
+                <Text style={styles.cartItemTitle}>{item.title}</Text>
+               
+               
+
                 <Text style={styles.cartItemPrice}>Price: ${item.price.toFixed(2)}</Text>
               </View>
-              <TouchableOpacity onPress={() => handleRemoveItem(item.id)}>
-                <Text style={styles.removeItemButton}>Remove</Text>
+              <TouchableOpacity
+                  style={styles.quantityButton}
+                  onPress={() => handleIncreaseQuantity(item.id)}
+                >
+                  <Text style={styles.quantityButtonText}>+</Text>
+                </TouchableOpacity>
+                <Text style={styles.cartItemQuantity}>{item.quantity}</Text>
+
+                <TouchableOpacity
+                  style={styles.quantityButton}
+                  onPress={() => handleDecreaseQuantity(item.id)}
+                >
+                  <Text style={styles.quantityButtonText}>-</Text>
+                </TouchableOpacity>
+              <TouchableOpacity style={styles.removeItemButton} onPress={() => handleRemoveItem(item.id)}>
+                <Text>
+                  <Icon name="trash" style={styles.removeItemText} />
+                </Text>
+
               </TouchableOpacity>
+
             </View>
           )}
           keyExtractor={(item) => item.id.toString()}
         />
       ) : (
-        <Text style={styles.emptyCartText}>Your cart is empty.</Text>
+        <Text style={styles.emptyCartText}>Giỏ hàng trống.</Text>
       )}
-      <Text style={styles.totalPrice}>Total Price: ${totalPrice.toFixed(2)}</Text>
+      <Text style={styles.totalPrice}>Tổng cộng: ${totalPrice.toFixed(2)}</Text>
       <Button title="Thanh Toán" onPress={handleCheckout} />
     </View>
   );
@@ -126,10 +169,12 @@ const styles = StyleSheet.create({
   cartItemPrice: {
     fontSize: 14,
   },
-  removeItemButton: {
+  cartItemQuantity:{
     fontSize: 14,
+  },
+  removeItemText: {
+    fontSize: 25 ,
     color: 'red',
-    marginTop: 8,
   },
   emptyCartText: {
     fontSize: 16,
@@ -141,6 +186,22 @@ const styles = StyleSheet.create({
     marginTop: 16,
     textAlign: 'center',
   },
+  removeItemButton:{
+    paddingLeft: 30,
+  },
+  quantityButton:{
+    backgroundColor: 'white',
+    paddingHorizontal: 5,
+    alignItems: 'center',
+    borderRadius: 30,
+  },
+  quantityButtonText: {
+    color: 'black',
+    fontSize: 18,
+    fontWeight: 'bold',
+    borderRadius: 8,
+  },
+
 });
 
-export default CartScreen;
+export default Cart;

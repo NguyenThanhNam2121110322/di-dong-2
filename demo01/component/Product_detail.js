@@ -26,8 +26,12 @@ const SingleProductScreen = () => {
   }, []);
 
   const handleQuantityChange = (value) => {
-    const newQuantity = Math.max(parseInt(value), 1);
-    setQuantity(newQuantity);
+    if (value === "") {
+      setQuantity(0);
+    } else {
+      const newQuantity = Math.max(parseInt(value), 0);
+      setQuantity(newQuantity);
+    }
   };
 
   const handleBuyNow = async () => {

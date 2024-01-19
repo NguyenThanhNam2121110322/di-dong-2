@@ -1,20 +1,33 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 const Payment = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCVV] = useState('');
+  const navigation = useNavigation();
 
   const handlePayment = () => {
     // Xử lý thanh toán khi nhấn nút "Thanh toán"
+    clearAsyncStorage();
+    navigation.navigate('HomeScreen');
+  };
+  const clearAsyncStorage = async () => {
+    try {
+      await AsyncStorage.clear();
+      console.log('Dữ liệu trong AsyncStorage đã được xóa thành công');
+    } catch (error) {
+      console.error('Lỗi xóa dữ liệu trong AsyncStorage:', error);
+    }
   };
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Image source={require('../assets/logo1.jpg')} style={styles.logo} />
+        <Image source={require('../assets/logo2.jpg')} style={styles.logo} />
       </View>
 
       <View style={styles.formGroup}>

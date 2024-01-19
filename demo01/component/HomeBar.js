@@ -30,11 +30,12 @@ function HomeBar() {
                 <Icon name="search" size={20} color="#333333" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.item} onPress={() => handleLoginPress()}>
-                <Icon name="user" size={20} color="#333333" />
-            </TouchableOpacity>
+           
             <TouchableOpacity style={styles.item} onPress={() => handleCartPress(cartItems)}>
                 <Icon name="shopping-cart" size={20} color="#333333" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item} onPress={() => handleLoginPress()}>
+                <Icon name="sign-out" size={20} color="#333333" />
             </TouchableOpacity>
         </View>
     );
