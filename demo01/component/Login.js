@@ -4,6 +4,7 @@ import { useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AuthContext from '../Auth/AuthContext';
 export default function Logins() {
+    
     const [value, setValue] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -12,16 +13,17 @@ export default function Logins() {
 
 
     const handleLogin = () => {
-
+        
         const loginSuccess = login(email, password);
         if (loginSuccess) {
-            Alert.alert('Đang đăng nhập');
+            Alert.alert('Đăng nhập thành công');
             navigation.replace('HomeScreen');
         }
         if (!loginSuccess) {
             Alert.alert('Sai tài khoản mật khẩu hoặc trống thông tin');
         }
     };
+    
     return (
         <View style={styles.container}>
             <View style={styles.text}>
@@ -36,7 +38,7 @@ export default function Logins() {
             </View>
             <View style={styles.InforContainer}>
                 <TextInput style={styles.input}
-                    placeholder=" Name"
+                    placeholder=" Email"
                     placeholderTextColor='rgba(255,255,255,9.8)'
                     onChangeText={(text) => setEmail(text)}
                 />
@@ -50,11 +52,11 @@ export default function Logins() {
                         <Text style={{ color: "blue" }}>Tạo tài khoản mới</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.Pass}>
+                {/* <View style={styles.Pass}>
                     <TouchableOpacity onPress={() => navigation.navigate('Resgister')}>
                         <Text style={{ color: "blue" }}>Quên mật khẩu</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
                 <View style={styles.button} >
                     <Button
                         title="Login"
@@ -85,11 +87,11 @@ const styles = StyleSheet.create({
     },
     register: {
         marginTop: -55,
-        marginLeft: 160
+        marginRight: 90,
     },
     Pass: {
         marginTop: -19,
-        marginRight: 150
+        marginRight: 150,
     },
 
     title: {

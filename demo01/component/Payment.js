@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, Alert } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
@@ -19,6 +19,7 @@ const Payment = () => {
     try {
       await AsyncStorage.clear();
       console.log('Dữ liệu trong AsyncStorage đã được xóa thành công');
+      Alert.alert('Thanh toán thành công');
     } catch (error) {
       console.error('Lỗi xóa dữ liệu trong AsyncStorage:', error);
     }

@@ -6,12 +6,13 @@ import { useNavigation } from '@react-navigation/native';
 import { CartContext } from '../CartProvider/CartContext';
 
 
+
 export default function HomeScreen() {
     const { addToCart } = useContext(CartContext);
     const navigation = useNavigation();
   
     const handleProductPress = (product) => {
-      navigation.navigate('SingleProduct', { product });
+      navigation.navigate('ProductDetail', { product });
     };
   
     const [products, setProducts] = useState([]);
@@ -71,6 +72,7 @@ export default function HomeScreen() {
             ))}
           </View>
         </ScrollView>
+       
       </View>
       
     );

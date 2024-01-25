@@ -9,11 +9,6 @@ export default function Header() {
       </View>
       <View style={styles.searchContainer}>
         <Text style={styles.searchInput}>NTN Shop</Text>
-        {/* <TextInput
-          style={styles.searchInput}
-          placeholder="Search..."
-          // Add your search functionality here
-        /> */}
       </View>
     </View>
   );

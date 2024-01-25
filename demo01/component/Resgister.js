@@ -18,7 +18,7 @@ export default function Register()  {
       Alert.alert('Please fill in all fields');
     } else {
       register(email, password);
-      Alert.alert('Registration successful');
+      Alert.alert('Đăng ký thành công');
       navigation.replace('Login');
     }
   };

@@ -61,7 +61,10 @@ const Cart = () => {
     try {
       const updatedCartItems = cartItems.map(item => {
         if (item.id === itemId) {
-          return null;
+          item.quantity -= 1;
+          if (item.quantity === 0) {
+            return null;
+          }
         }
         return item;
       }).filter(Boolean);
@@ -115,7 +118,7 @@ const Cart = () => {
 
                 <TouchableOpacity
                   style={styles.quantityButton}
-                  onPress={() => handleDecreaseQuantity(item.id)}
+                  onPress={() => handleRemoveItem(item.id)}
                 >
                   <Text style={styles.quantityButtonText}>-</Text>
                 </TouchableOpacity>
